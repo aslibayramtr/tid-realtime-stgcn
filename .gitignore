@@ -1,0 +1,31 @@
+﻿# Python ve sanal ortam
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Veri seti ve işlenmiş tensörler
+archive/
+data/raw/
+data/processed/
+*.mp4
+*.avi
+*.npy
+*.npz
+
+# Model ağırlıkları ve çalışma logları
+outputs/checkpoints/*.pt
+outputs/checkpoints/*.pth
+outputs/logs/*.log
+
+# Yerel IDE ve OS dosyaları (GitHub'da görünmez)
+.cursorrules
+.cursor/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+.cursorignore
+*.log
