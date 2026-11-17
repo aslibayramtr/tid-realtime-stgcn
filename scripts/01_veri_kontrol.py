@@ -5,13 +5,13 @@ AUTSL veri bütünlük ve etiket eşleme kontrol betiği
 Proje: KNCO-1027 — Gerçek Zamanlı TİD Tahmini (Ön Çalışma)
 
 Kullanım:
-    python outputs/veri_kontrol.py
-    python outputs/veri_kontrol.py --root "C:/Users/aslibayram/Desktop/on_calısma"
-    python outputs/veri_kontrol.py --sample-videos 20 --probe
-    python outputs/veri_kontrol.py --export outputs/etiket_ozet.csv
+    python scripts/01_veri_kontrol.py
+    python scripts/01_veri_kontrol.py --root "C:/Users/aslibayram/Desktop/on_calisma"
+    python scripts/01_veri_kontrol.py --sample-videos 20 --probe
+    python scripts/01_veri_kontrol.py --export outputs/etiket_ozet.csv
 
 Beklenen yapı:
-    archive/AUTSL/
+    data/raw/AUTSL/
         train/  *.mp4
         val/    *.mp4
         test/   *.mp4
@@ -72,12 +72,12 @@ def find_project_root(explicit: Optional[str] = None) -> Path:
     if explicit:
         return Path(explicit).expanduser().resolve()
     here = Path(__file__).resolve().parent
-    # outputs/ -> on_calisma/
+    # scripts/ -> on_calisma/
     candidate = here.parent
-    if (candidate / "archive").exists():
+    if (candidate / "data" / "raw" / "AUTSL").exists():
         return candidate
     cwd = Path.cwd().resolve()
-    if (cwd / "archive").exists():
+    if (cwd / "data" / "raw" / "AUTSL").exists():
         return cwd
     return candidate
 
@@ -300,7 +300,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     args = parser.parse_args(argv)
 
     root = find_project_root(args.root)
-    autsl = root / "archive" / "AUTSL"
+    autsl = root / "data" / "raw" / "AUTSL"
     print("=" * 72)
     print("AUTSL VERİ KONTROL RAPORU")
     print(f"Kök     : {root}")
@@ -308,7 +308,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     print("=" * 72)
 
     if not autsl.exists():
-        print("[HATA] archive/AUTSL bulunamadı.")
+        print("[HATA] data/raw/AUTSL bulunamadı.")
         return 2
 
     # --- Eksik / mevcut dosya envanteri ---
